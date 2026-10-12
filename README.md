@@ -157,9 +157,9 @@ Hold **L1 + R1 + B** for about 1–2 s in each of these states, and note what it
 |---|---|
 | Just booted (zero torque) | `Robot FSM id 0 (zero torque)… Not saluting.` |
 | After L2+R2 (debug mode) | `Leg motor modes 000000000000 … Not saluting.` |
-| Standing under Unitree's control (your usual remote sequence) | `Leg modes 111111111111, FSM id <N>: OK.` then `DRY RUN: all checks passed` |
+| Standing under Unitree's control (your usual remote sequence) | `Leg modes 111111111111, FSM id 801: OK.` then `DRY RUN: all checks passed` |
 
-On our robot, `<N>` was **801** (run mode). See [Robot test results](#robot-test-results).
+801 is run mode. See [Robot test results](#robot-test-results).
 
 Also watch the robot while you press L1+R1+B: **Unitree's controller itself should do nothing.** If the robot reacts to that combo (moves or beeps), stop. We'd need a different combo.
 
