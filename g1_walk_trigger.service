@@ -1,0 +1,23 @@
+[Unit]
+Description=G1 walk trigger (L1+R1+Y starts the unitree_rl_gym walker; listens only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=unitree
+WorkingDirectory=/home/unitree/g1_walk_trigger
+Environment="HOME=/home/unitree"
+# Wait until the robot's internal network (eth0) is up
+ExecStartPre=/bin/bash -c 'until ip addr show eth0 | grep -q "inet "; do sleep 1; done'
+ExecStart=/usr/bin/python3 -u /home/unitree/g1_walk_trigger/walk_trigger.py
+StandardOutput=append:/home/unitree/trigger.log
+StandardError=append:/home/unitree/trigger.log
+Restart=on-failure
+RestartSec=5
+# Stopping/restarting this service stops ONLY the listener.
+# A walker (deploy_real.py) it already started keeps running, so the robot never drops mid-walk.
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
