@@ -15,7 +15,7 @@ Each move lives on **its own branch**, with its code, its systemd service and a 
 
 To get one branch:
 ```bash
-git clone -b <branch> https://github.com/sondos-myi/g1-robot-moves.git
+git clone -b salute https://github.com/sondos-myi/g1-robot-moves.git
 ```
 
 ## Two ways to move the G1
@@ -23,23 +23,21 @@ git clone -b <branch> https://github.com/sondos-myi/g1-robot-moves.git
 1. **Unitree stays in charge (recommended).** Unitree's controller keeps the robot balanced, and we either send only the arms (`rt/arm_sdk`, the salute) or ask the firmware to play one of its own motions (`SetFsmId(550xxx)`, hands on hips and the firmware moves). Nothing here commands the legs.
 2. **Our own controller (debug mode).** L2 + R2 switches Unitree's controller off and an RL policy drives every motor (the walker). The robot is limp until the policy starts, so it must hang on a gantry.
 
-## Shared facts about our robot
+## On the robot
 
-- Programs run on the **Jetson (PC2)**: Ubuntu 20.04, Python 3.8, `unitree_sdk2_python` in `~/unitree_sdk2_python`, internal network on `eth0` (192.168.123.164).
-- Every branch puts its files in **`~/g1_walk_trigger`** on the robot, and each move has its own service and log (`~/trigger.log`, `~/salute.log`, `~/motion.log`).
-- The main board (PC1) runs Unitree's controller and is locked.
-- **Robot states (FSM id):** 0 zero torque, 1 damping, 4 standing/preparation, 500 walk mode, 801 run mode, 550 playing a firmware motion.
-- **Debug vs normal:** all 12 leg motor modes are `1` while Unitree is in charge and `0` in debug mode. (`MotionSwitcherClient.CheckMode()` doesn't show the difference on our robot.)
-- **The official remote manual is wrong for our firmware.** The measured button map is on the `firmware-moves` branch.
-- The voice bot on the same robot uses **F1**. None of our combos clash with it.
+All branches install into **`~/g1_walk_trigger`** on the Jetson. Each move runs as its own service with its own log:
 
-## Ground rules on the robot
+| Branch | Service | Log |
+|---|---|---|
+| `walker` | `g1_walk_trigger` | `~/trigger.log` (+ `~/walk.log`) |
+| `salute` | `g1_salute_trigger` (not installed) | `~/salute.log` |
+| `hands-on-hips` | `g1_motion_trigger` | `~/motion.log` |
 
-1. One person works on the robot at a time (`who` before you start).
-2. Only **add** files and services. Don't edit Unitree's or the voice bot's.
-3. First real run of anything new: **on the gantry**, with someone holding the remote.
-4. Every branch has a laptop test with a fake robot (`fake_remote.py`, DDS domain 1 on `lo`). Run it before copying anything to the robot.
-5. Never run `apt --fix-broken install` on the Jetson: apt is in a broken state, and "fixing" it could remove the robot's time sync.
+**FSM ids** (LocoClient API 7001): 0 zero torque · 1 damping · 4 standing · 500 walk mode · 801 run mode · 550 playing a firmware motion.
+
+**Debug mode check:** all 12 leg motor modes are `1` while Unitree is in charge, `0` in debug mode. Every trigger checks this before it does anything; `CheckMode()` doesn't show the difference on our robot.
+
+**Testing a change:** run the branch's laptop test first (`fake_remote.py`, DDS domain 1 on `lo`), then the dry run on the robot, then the gantry.
 
 ## Credits
 
