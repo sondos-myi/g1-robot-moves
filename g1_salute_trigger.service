@@ -1,0 +1,23 @@
+[Unit]
+Description=G1 salute trigger (L1+R1+B salutes with the right hand on rt/arm_sdk while Unitree balances)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=unitree
+WorkingDirectory=/home/unitree/g1_walk_trigger
+Environment="HOME=/home/unitree"
+# Wait until the robot's internal network (eth0) is up
+ExecStartPre=/bin/bash -c 'until ip addr show eth0 | grep -q "inet "; do sleep 1; done'
+ExecStart=/usr/bin/python3 -u /home/unitree/g1_walk_trigger/salute_trigger.py
+StandardOutput=append:/home/unitree/salute.log
+StandardError=append:/home/unitree/salute.log
+Restart=on-failure
+RestartSec=5
+# On stop, salute_trigger.py catches SIGTERM and hands the arms back to Unitree
+# (blend weight -> 0 over 0.5 s) before exiting. Give it time to do that.
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
