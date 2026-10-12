@@ -1,0 +1,21 @@
+[Unit]
+Description=G1 motion trigger (L1+R1+A plays firmware motion 534 hands-on-hips via SetFsmId 550534)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=unitree
+WorkingDirectory=/home/unitree/g1_walk_trigger
+Environment="HOME=/home/unitree"
+# Wait until the robot's internal network (eth0) is up
+ExecStartPre=/bin/bash -c 'until ip addr show eth0 | grep -q "inet "; do sleep 1; done'
+ExecStart=/usr/bin/python3 -u /home/unitree/g1_walk_trigger/motion_trigger.py
+StandardOutput=append:/home/unitree/motion.log
+StandardError=append:/home/unitree/motion.log
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
