@@ -39,8 +39,6 @@
 | L1 + R1 + **B** (hold 1 s) | `salute_trigger.py` (`salute` branch) | run mode | Works, but its service isn't installed |
 | L1 + R1 + **A** (hold 1 s) | `motion_trigger.py` (`hands-on-hips` branch): motion 534 | run mode | Service installed, works |
 | **F1** | voice bot (unitree_converse / Nashmi_Bot) | – | Running |
-| F1 + START | previous team's `yaokong` program on the Jetson: "remote mode" | – | Its binary `g1_action_yaokong` is missing |
-| SELECT + F1 + F3 | `yaokong`: runs `~/unitree_dance/run_g1_tracking.sh` | – | That script is missing |
 
 **Free for new moves:** any combo not in these tables. Use a **hold**, not a double-tap, so it can't clash with the firmware shortcuts.
 

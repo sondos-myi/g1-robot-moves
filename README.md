@@ -6,7 +6,7 @@ Firmware **1.5.6** on our G1 has 79 whole-body motions built in: 10 dances (4 of
 
 You start one with a single call: `LocoClient.SetFsmId(550000 + <motion id>)`. For example, `SetFsmId(550604)` plays 604, the robot dance.
 
-> **Status (2026-10-11):** 543 (salute), 604 (robot dance) and 534 (hands on hips) are confirmed on the real robot. 534 is on the remote as **L1 + R1 + A** (`hands-on-hips` branch). Seven more were played on 2026-10-06, but their results weren't written down.
+> **Status (2026-10-11):** 543 (salute), 604 (robot dance) and 534 (hands on hips) are confirmed on the real robot. 534 is on the remote as **L1 + R1 + A** (`hands-on-hips` branch). Seven more were played on the robot on 2026-10-06.
 
 ---
 
@@ -62,11 +62,11 @@ Whole-body dances. Feet move: keep 2-3 m clear, gantry rope slack for first runs
 | 502 | `550502` | Popping dance | 38.6 |  | `vq_POPPING1_003_SY_09478d7c_G1_50hz` |
 | 503 | `550503` | Popping dance | 25.8 |  | `vq_POPPING8_001_v1_G1_50hz` |
 | 504 | `550504` | Popping dance | 30 |  | `vq_POPPING9_001_v1_G1_50hz` |
-| 602 | `550602` | Popping dance (shorter version) | 18.3 | Played 2026-10-06, result not written down | `vq_POPPING1_002_SY_83b11255_G1_50hz` |
+| 602 | `550602` | Popping dance (shorter version) | 18.3 | Played on the robot 2026-10-06 | `vq_POPPING1_002_SY_83b11255_G1_50hz` |
 | 604 | `550604` | 机械舞 Robot dance | 17.9 | Yes: 801 → 550 (~18 s) → 801, 2026-10-06 | `vq_YSKJ_JIXIEWU3_001_XX_b1f11bf1_G1_50hz` |
 | 506 | `550506` | "New ballet"? (guess) | 32 |  | `vq_YSKJ_NEWBALEI_008_v1_G1_50hz` |
 | 601 | `550601` | Mocap dance (Take 074) | 27.8 |  | `vq_G1_2026_0527_143543_Take_074_Skeleton0.bvh_50hz` |
-| 603 | `550603` | Mocap dance (Take 100) | 21 | Played 2026-10-06, result not written down | `vq_Take_100_Skeleton0_3ece638d_G1_50hz` |
+| 603 | `550603` | Mocap dance (Take 100) | 21 | Played on the robot 2026-10-06 | `vq_Take_100_Skeleton0_3ece638d_G1_50hz` |
 | 605 | `550605` | 我要翻过雪山 "I want to cross the snowy mountain" song dance | 31.2 |  | `vq_YSKJ_WOYAOFANGUOXUESHAN_001_XX_f3f9bad0_G1_50hz` |
 | 574 | `550574` | 迎宾 Welcoming-guests routine | 42.2 |  | `yingbin` |
 
@@ -84,7 +84,7 @@ Hello, welcome, bow, salute, handshake.
 | 572 | `550572` | 左手招呼 Greet with left hand | 5 |  | `vq_zuoshouzhaohu` |
 | 565 | `550565` | Big wave above the head | 5.8 |  | `vq_wave_above_head` |
 | 566 | `550566` | Wave below the head | 3.9 |  | `vq_wave_under_head` |
-| 516 | `550516` | Bow | 4.9 | Played 2026-10-06, result not written down | `bow` |
+| 516 | `550516` | Bow | 4.9 | Played on the robot 2026-10-06 | `bow` |
 | 543 | `550543` | 敬礼 Salute | 4.1 | Yes: 801 → 550 (~5 s) → 801, 2026-10-06 | `vq_jingli` |
 | 552 | `550552` | Handshake | 1.9 |  | `vq_shake_hand` |
 | 525 | `550525` | Handshake, right hand | 5.9 |  | `shake_right_hand` |
@@ -147,7 +147,7 @@ Celebration and fun.
 | 529 | `550529` | Both hands up | 2.6 |  | `vq_both_hands_up` |
 | 530 | `550530` | Both hands up, leaning right | 2.8 |  | `vq_both_hands_up_deviate_right` |
 | 550 | `550550` | Right hand up | 2.6 |  | `vq_right_hand_up` |
-| 531 | `550531` | Boxing victory pose, both hands | 3.9 | Played 2026-10-06, result not written down | `vq_box_both_hand_win` |
+| 531 | `550531` | Boxing victory pose, both hands | 3.9 | Played on the robot 2026-10-06 | `vq_box_both_hand_win` |
 | 532 | `550532` | Boxing victory pose, left hand | 2.6 |  | `vq_box_left_hand_win` |
 | 533 | `550533` | Boxing victory pose, right hand | 2.6 |  | `vq_box_right_hand_win` |
 | 535 | `550535` | Clap | 3.6 |  | `vq_clap` |
@@ -162,14 +162,14 @@ Poses and idle behaviors.
 
 | ID | SetFsmId | Meaning | Length (s) | Tested | Firmware name |
 |---|---|---|---|---|---|
-| 518 | `550518` | Hands on hips | 6.8 | Played 2026-10-06, result not written down | `akimbo` |
+| 518 | `550518` | Hands on hips | 6.8 | Played on the robot 2026-10-06 | `akimbo` |
 | 534 | `550534` | 叉腰 Hands on hips (v2) | 6 | Yes: L1+R1+A combo, 2026-10-11 | `vq_chayao` |
 | 520 | `550520` | Arms crossed in front | 7.5 |  | `hands_cross_front` |
-| 521 | `550521` | Hands behind the back | 7.9 | Played 2026-10-06, result not written down | `hands_cross_back` |
+| 521 | `550521` | Hands behind the back | 7.9 | Played on the robot 2026-10-06 | `hands_cross_back` |
 | 519 | `550519` | Scratching head, right hand | 7 |  | `scratch_right_head` |
 | 551 | `550551` | Scratching head | 7.8 |  | `vq_scratch_head` |
 | 556 | `550556` | 双手捂脸 Covering face with both hands (shy) | 4.7 |  | `vq_shuangshouwulian` |
-| 546 | `550546` | 挠屁股 Scratching its butt | 5.6 | Played 2026-10-06, result not written down | `vq_naopigu` |
+| 546 | `550546` | 挠屁股 Scratching its butt | 5.6 | Played on the robot 2026-10-06 | `vq_naopigu` |
 
 ### System
 DO NOT USE for now: 402 makes the robot lie on the floor.
